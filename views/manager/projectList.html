@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<link rel="stylesheet" href="/public/css/manager/userList.css">
+<div style="padding: 10px 20px;">
+    <span class="layui-breadcrumb">
+      <a href="/admin">管理首页</a>
+      <a><cite>项目列表</cite></a>
+    </span>
+    <form class="layui-form x-left layui-elem-quote" action="" style="padding:10px 15px;margin-bottom: 0;height: 38px;">
+        <div class="layui-form-pane">
+            <div class="layui-form-item">
+                <div class="layui-input-inline" style="width:140px">
+                    <input type="text" name="description"  autocomplete="off" placeholder="项目关键字" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <select name="manager" lay-search="">
+                        <option value="" selected>请选择项目经理</option>
+                        {% for manager in managers%}
+                        <option value="{{manager.id}}">{{manager.username}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <select name="state" lay-search="">
+                        <option value="" selected>请选择项目状态</option>
+                        <option value="未开始">未开始</option>
+                        <option value="进行中">进行中</option>
+                        <option value="已完成">已完成</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <button class="layui-btn btn-blue" lay-submit="" lay-filter="searchProject"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+                <button id="btnAdd" class="layui-btn x-right btn-lightblue" lay-submit="" lay-filter="addProject" style="float: right"><i class="layui-icon">&#xe61f;</i>录入项目</button>
+            </div>
+        </div>
+    </form>
+    <input type="hidden" id="role" value="{{userInfo.role}}">
+    <input type="hidden" id="current" value="{{userInfo.id}}">
+    <table id="projectList" style="margin:10px 15px;" lay-filter="handler" ></table>
+    <script type="text/html" id="toolBar" >
+        <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    </script>
+</div>
+
+{%endblock%}
+{% block js %}
+<script src="/public/js/manager/projectList.js"></script>
+{% endblock %}
