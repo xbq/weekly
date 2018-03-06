@@ -161,7 +161,7 @@ router.get('/detailWeekly',function (req,res) {
             username:new Buffer(req.userInfo.username, 'base64').toString(),
             role:req.userInfo.role,
             id:req.userInfo.id,
-            isAdmin:userInfo.isAdmin
+            isAdmin:req.userInfo.isAdmin
         }
     });
 });
