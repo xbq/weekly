@@ -5,7 +5,7 @@ layui.use(['table','form','layer'], function(){
     var layer= layui.layer;
     debugger
     var isAdmin = $("#isAdmin").val();
-    if(!isAdmin){
+    if(isAdmin!=='true'){
         $("#btnAdd").css('display','none');
     }else{
         $("#btnAdd").css('display','block');
@@ -64,7 +64,7 @@ layui.use(['table','form','layer'], function(){
         var manager = data.manager;
 
         if(layEvent === 'del') {
-            if(current!=manager&&!isAdmin){
+            if(current!=manager&&isAdmin!=='true'){
                 layer.alert('对不起，只有项目经理和管理员才有删除的权限！', {icon: 1});
             }else{
                 layer.confirm('确认删除该行记录？', function(index) {
@@ -86,7 +86,7 @@ layui.use(['table','form','layer'], function(){
             }
 
         } else if(layEvent === 'edit') {
-            if(current!=manager&&!isAdmin){
+            if(current!=manager&&isAdmin!=='true'){
                 layer.alert('对不起，只有项目经理和管理员才有编辑的权限！', {icon: 1});
             }else{
                 layer.open({

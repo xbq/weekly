@@ -108,32 +108,39 @@ router.get('/detailProject',function (req,res) {
  * 周报管理页面跳转
  */
 router.get('/weeklyList',function (req,res) {
-    Project.findAll().then(function(projects){
-        res.render('manager/weeklyList',{
-            userInfo:{
-                username:new Buffer(req.userInfo.username, 'base64').toString(),
-                role:req.userInfo.role,
-                id:req.userInfo.id,
-                isAdmin:req.userInfo.isAdmin
-            },
-            projects:projects
+    User.findAll().then(function(users){
+        Project.findAll().then(function(projects){
+            res.render('manager/weeklyList',{
+                userInfo:{
+                    username:new Buffer(req.userInfo.username, 'base64').toString(),
+                    role:req.userInfo.role,
+                    id:req.userInfo.id,
+                    isAdmin:req.userInfo.isAdmin
+                },
+                projects:projects,
+                executors:users
+            });
         });
     });
+
 });
 
 /**
  * 周报审批列表跳转
  */
 router.get('/weeklyApproveList',function (req,res) {
-    Project.findAll().then(function(projects){
-        res.render('manager/weeklyApproveList',{
-            userInfo:{
-                username:new Buffer(req.userInfo.username, 'base64').toString(),
-                role:req.userInfo.role,
-                id:req.userInfo.id,
-                isAdmin:req.userInfo.isAdmin
-            },
-            projects:projects
+    User.findAll().then(function(users) {
+        Project.findAll().then(function (projects) {
+            res.render('manager/weeklyApproveList', {
+                userInfo: {
+                    username: new Buffer(req.userInfo.username, 'base64').toString(),
+                    role: req.userInfo.role,
+                    id: req.userInfo.id,
+                    isAdmin: req.userInfo.isAdmin
+                },
+                projects: projects,
+                executors:users
+            });
         });
     });
 });

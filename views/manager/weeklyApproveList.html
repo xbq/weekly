@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/public/css/manager/userList.css">
 <div style="padding: 10px 20px;">
     <span class="layui-breadcrumb">
-      <a href="/admin">管理首页</a>
+      <a href="javascript:;">管理首页</a>
       <a><cite>周报审批列表</cite></a>
     </span>
     <form class="layui-form x-left layui-elem-quote" action="" style="padding:10px 15px;margin-bottom: 0;height: 38px;">
@@ -12,6 +12,14 @@
             <div class="layui-form-item">
                 <div class="layui-input-inline" style="width:140px">
                     <input type="text" name="taskDesc"  autocomplete="off" placeholder="任务描述关键字" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <select name="executor" lay-search="">
+                        <option value="" selected>选择周报录入人员</option>
+                        {% for executor in executors %}
+                        <option value="{{executor.id}}">{{executor.username}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="layui-input-inline" style="width:140px">
                     <select name="project" lay-search="">

@@ -8,7 +8,6 @@ layui.use(['table', 'form', 'layer'], function () {
     if ($('#isAdmin').val()=='true') {
         cols = [[ //表头
             {field: 'username', width: 200, title: '用户名'}
-            , {field: 'password', width: 200, title: '密码'}
             , {width: 200, title: '角色', templet: '<div>{{d.roleObj.role}}</div>'}
             , {field: 'tel', width: 200, title: '联系方式'}
             , {field: 'department', width: 200, title: '部门'}
@@ -36,7 +35,7 @@ layui.use(['table', 'form', 'layer'], function () {
         , layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
         , cols: cols,
         limits: [1, 10, 20, 50, 100],
-        limit: 20
+        limit: 10
     });
 
 //监听提交

@@ -33,6 +33,7 @@ layui.use(['form','laydate'], function () {
                     $("#preStartTime").val((res.project.preStartTime||"").split("T")[0]);
                     $("#preEndTime").val((res.project.preEndTime||"").split("T")[0]);
                     $("#manager").val(res.project.manager);
+                    $("#state").val(res.project.state);
                     form.render();
                 }
             }

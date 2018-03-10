@@ -88,6 +88,7 @@ router.get('/find', function (req, res) {
     var project = req.query.project || '';
     var isApprove = req.query.isApprove || '';
     var process = req.query.process || '';
+    var executor = req.query.executor || '';
     var whereObj = {};
     if (taskDesc) {
         whereObj.taskDesc = {$like: '%' + taskDesc.trim() + '%'};
@@ -103,6 +104,8 @@ router.get('/find', function (req, res) {
     }
     if (!req.userInfo.isAdmin) {
         whereObj.executor = req.userInfo.id
+    }else{
+        whereObj.executor = executor;
     }
     Weekly.findAndCountAll({
         where: whereObj,
@@ -133,6 +136,7 @@ router.get('/approveFind', function (req, res) {
     var project = req.query.project || '';
     var isApprove = req.query.isApprove || '';
     var process = req.query.process || '';
+    var executor = req.query.executor || '';
     var whereObj = {};
     if (taskDesc) {
         whereObj.taskDesc = {$like: '%' + taskDesc.trim() + '%'};
@@ -146,7 +150,9 @@ router.get('/approveFind', function (req, res) {
     if (process) {
         whereObj.process = process;
     }
-
+    if (executor) {
+        whereObj.executor = executor;
+    }
     Weekly.findAndCountAll({
         where: whereObj,
         include: [{model: User, as: 'executorObj'}, {model: User, as: 'approverObj'}, {
