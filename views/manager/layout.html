@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>中海达项目管理系统</title>
     <link rel="icon" href="/public/images/title.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/public/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/public/plugins/layui/css/layui.css">
 
     {% block head %}{% endblock %}
     <style>
-        .x-slide_left{
+        .x-slide_left {
             width: 17px;
             height: 61px;
             background: url(/public/images/shrink.png) 0 0 no-repeat;
@@ -18,7 +19,8 @@
             margin-top: -5%;
             cursor: pointer;
         }
-        .x-slide_right{
+
+        .x-slide_right {
             width: 17px;
             height: 61px;
             background: url(/public/images/shrink.png) 0 -61px no-repeat;
@@ -28,20 +30,29 @@
             margin-top: -5%;
             cursor: pointer;
         }
-        .layui-header{
+
+        .layui-header {
             height: 50px;
         }
-        .layui-body{
-            top:50px;
+
+        .layui-body {
+            top: 50px;
         }
-        .layui-side{
-            top:50px;
+
+        .layui-side {
+            top: 50px;
         }
-        .layui-nav .layui-nav-item{
+
+        .layui-nav .layui-nav-item {
             height: 50px;
         }
-        .layui-nav-tree .layui-nav-bar{
-            color:#1789ff !important;
+
+        .layui-nav-tree .layui-nav-bar {
+            color: #1789ff !important;
+        }
+
+        .fa.fa-file-text:before {
+            content: "\f15c";
         }
     </style>
 
@@ -65,7 +76,8 @@
                     <dd><a href="javascript:;" id="passwordSet">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a id="btn_logout" href="javascript:;" style="font-size: 16px;color: white;">退出</a></li>
+            <li class="layui-nav-item"><a id="btn_logout" href="javascript:;"
+                                          style="font-size: 16px;color: white;">退出</a></li>
         </ul>
         <input type="hidden" id="userId" value="{{userInfo.id}}">
         <input type="hidden" id="isAdmin" value="{{userInfo.isAdmin}}">
@@ -77,22 +89,37 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item">
-                    <a href="/manager/projectList">项目管理</a>
+                    <a href="/manager/projectList">
+                        <i class="fa fa-book"
+                           style="top: 3px;margin-right: 4px;margin-left: 3px;color: #51aafa;"></i><cite>
+                        项目管理 </cite></a>
                 </li>
                 <li class="layui-nav-item" style="display: none">
-                    <a href="/manager/taskList">任务管理</a>
+                    <a href="/manager/taskList">
+                        <i class="fa fa-file-alt"
+                           style="top: 3px;margin-right: 4px;margin-left: 3px;color: #51aafa;"></i><cite>
+                        任务管理 </cite></a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="/manager/weeklyList">周报管理</a>
+
+                    <a href="/manager/weeklyList"><i class="fa fa-file-text"
+                                                     style="top: 3px;margin-right: 4px;margin-left: 3px;color: #51aafa;"></i><cite>
+                        周报管理 </cite></a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="/manager/weeklyApproveList">周报审批</a>
+                    <a href="/manager/weeklyApproveList"><i class="fa fa-edit"
+                                                            style="top: 3px;margin-right: 4px;margin-left: 3px;color: #51aafa;"></i><cite>
+                        周报审批 </cite></a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="/manager/userList">人员管理</a>
+                    <a href="/manager/userList"><i class="fa fa-user"
+                                                   style="top: 3px;margin-right: 4px;margin-left: 3px;color: #51aafa;"></i><cite>
+                        人员管理 </cite></a>
                 </li>
                 <li class="layui-nav-item" style="display: none;">
-                    <a href="/manager/statistics">信息汇总</a>
+                    <a href="/manager/statistics"><i class="fa fa-file"
+                                                     style="top: 3px;margin-right: 4px;margin-left: 3px;color: #51aafa;"></i><cite>
+                        信息汇总 </cite></a>
                 </li>
             </ul>
         </div>
