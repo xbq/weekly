@@ -3,7 +3,7 @@ var router = express.Router();
 var Project = require('../models/project');
 var Weekly = require('../models/weekly');
 var User = require('../models/user');
-
+var db =require('../models/db');
 Weekly.belongsTo(Project, {foreignKey: 'project', as: 'projectObj'});
 Weekly.belongsTo(User, {foreignKey: 'executor', as: 'executorObj'});
 Weekly.belongsTo(User, {foreignKey: 'approver', as: 'approverObj'});
@@ -260,6 +260,101 @@ router.get('/approve', function (req, res) {
         });
     })
 });
+
+router.get('/statisticByProject&Type',function(req,res){
+    //var isAdmin =req.cookies.get('isAdmin');
+    console.log(req.userInfo.isAdmin);
+    var sql = "";
+    if(req.userInfo.isAdmin===true){
+         sql = "select sum(taskTime) as taskTime ,taskType ,project.name as projectName from weekly left JOIN project on project.id = weekly.project group by taskType,project";
+    }else{
+        sql = "select sum(taskTime) as taskTime ,taskType ,project.name as projectName from weekly  left JOIN project on project.id = weekly.project where executor = "+req.userInfo.id+" group by taskType,project";
+    }
+
+    db.sequelize.query(sql).then(function (results) {
+        console.log(results);
+        res.json({
+            userInfo: req.userInfo,
+            data: results
+        });
+    })
+});
+
+router.get('/statisticByTaskType',function(req,res){
+    //var isAdmin =req.cookies.get('isAdmin');
+    console.log(req.userInfo.isAdmin);
+    var sql = "";
+    if(req.userInfo.isAdmin===true){
+        sql = "select sum(taskTime) as value ,taskType as name  from weekly  group by taskType";
+    }else{
+        sql = "select sum(taskTime) as value ,taskType  as name  from weekly  where executor = "+req.userInfo.id+" group by taskType";
+    }
+
+    db.sequelize.query(sql).then(function (results) {
+        console.log(results);
+        res.json({
+            userInfo: req.userInfo,
+            data: results
+        });
+    })
+});
+
+
+router.get('/statisticByProject',function(req,res){
+    var sql = "";
+    if(req.userInfo.isAdmin===true){
+        sql = "select sum(taskTime) as value,project.name as name from weekly left JOIN project on project.id = weekly.project group by project";
+    }else{
+        sql = "select sum(taskTime) as value,project.name as name from weekly  left JOIN project on project.id = weekly.project where executor = "+req.userInfo.id+" group by project";
+    }
+
+    db.sequelize.query(sql).then(function (results) {
+        console.log(results);
+        res.json({
+            userInfo: req.userInfo,
+            data: results
+        });
+    })
+});
+
+router.get('/statisticByWeek',function(req,res){
+    //var isAdmin =req.cookies.get('isAdmin');
+    console.log(req.userInfo.isAdmin);
+    var sql = "";
+    if(req.userInfo.isAdmin===true){
+        sql = "select sum(taskTime) as value ,week as name  from weekly  group by week";
+    }else{
+        sql = "select sum(taskTime) as value ,week  as name  from weekly  where executor = "+req.userInfo.id+" group by week";
+    }
+
+    db.sequelize.query(sql).then(function (results) {
+        console.log(results);
+        res.json({
+            userInfo: req.userInfo,
+            data: results
+        });
+    })
+});
+
+router.get('/statisticByMonth',function(req,res){
+    //var isAdmin =req.cookies.get('isAdmin');
+    console.log(req.userInfo.isAdmin);
+    var sql = "";
+    if(req.userInfo.isAdmin===true){
+        sql = "select sum(taskTime) as value ,month as name  from weekly  group by month";
+    }else{
+        sql = "select sum(taskTime) as value ,month  as name  from weekly  where executor = "+req.userInfo.id+" group by month";
+    }
+
+    db.sequelize.query(sql).then(function (results) {
+        console.log(results);
+        res.json({
+            userInfo: req.userInfo,
+            data: results
+        });
+    })
+});
+
 
 
 module.exports = router;

@@ -33,7 +33,6 @@ layui.use(['form'], function(){
                     layer.open({
                         content: res.message,
                         yes: function() {
-                            debugger
                             closeParentLayer();
                             if(parent.document.getElementsByClassName('layui-laypage-btn')[0]){
                                 parent.document.getElementsByClassName('layui-laypage-btn')[0].click();

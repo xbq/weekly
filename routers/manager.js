@@ -26,6 +26,20 @@ router.use(function (req,res,next) {
  * 首页
  */
 router.get('/',function (req,res) {
+    res.render('manager/index',{
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:req.userInfo.role,
+            id:req.userInfo.id,
+            isAdmin:req.userInfo.isAdmin
+        }
+    });
+});
+
+/**
+ * 首页
+ */
+/*router.get('/',function (req,res) {
     Project.findAll().then(function(projects){
         res.render('manager/weeklyList',{
             userInfo:{
@@ -37,7 +51,7 @@ router.get('/',function (req,res) {
             projects:projects
         });
     });
-});
+});*/
 
 /**
  * 用户管理页面跳转

@@ -40,7 +40,6 @@ layui.use(['table', 'form', 'layer'], function () {
         ]];
 
     } else {
-        debugger
         //非管理员显示的都是自己的周报没有必要进行录入人员的筛选
         $($('[name=executor]').parent()).css('display','none');
         cols = [[ //表头
@@ -93,6 +92,8 @@ layui.use(['table', 'form', 'layer'], function () {
         });
         return false;
     });
+
+
     //监听提交
     form.on('submit(addWeekly)', function () {
         layer.open({

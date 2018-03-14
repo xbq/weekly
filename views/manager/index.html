@@ -1,11 +1,17 @@
 {% extends 'layout.html' %}
 {% block main %}
 
-<h1>hello,{{userInfo.username}}</h1>
-<p>欢迎进入周报系统</p>
-
+<div class="layui-elem-quote" style="font-size: 16px;margin-bottom: 10px;background-color: #fff;">欢迎使用《中海达项目管理系统》</div>
+<div class="layui-row">
+    <div id="div_taskType" class="col-md-6" style="height: 600px;padding: 20px;background-color: #9acfea"></div>
+    <div id="div_project" class="col-md-6" style="height: 600px;padding: 20px;background-color: #9acfea"></div>
+    <div id="div_month" class="col-md-6" style="height: 600px;padding: 20px;background-color: #9acfea"></div>
+    <div id="div_week" class="col-md-6" style="height: 600px;padding: 20px;background-color: #9acfea"></div>
+</div>
 {%endblock%}
 
 {% block js %}
+<script src="/public/plugins/jquery/jquery.min.js"></script>
+<script src="/public/plugins/echarts-all.js"></script>
 <script src="/public/js/manager/index.js"></script>
 {% endblock %}
