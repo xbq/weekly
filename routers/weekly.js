@@ -262,13 +262,26 @@ router.get('/approve', function (req, res) {
 });
 
 router.get('/statisticByProject&Type',function(req,res){
-    //var isAdmin =req.cookies.get('isAdmin');
-    console.log(req.userInfo.isAdmin);
     var sql = "";
     if(req.userInfo.isAdmin===true){
-         sql = "select sum(taskTime) as taskTime ,taskType ,project.name as projectName from weekly left JOIN project on project.id = weekly.project group by taskType,project";
+         sql = "select  p.projectName," +
+             " sum(IF(taskType = 'bug修改', taskTime, 0)) AS 'bug修改'," +
+             " sum(IF(taskType = '方案设计', taskTime, 0)) AS '方案设计'," +
+             " sum(IF(taskType = '项目实施', taskTime, 0)) AS '项目实施'," +
+             " sum(IF(taskType = '功能测试', taskTime, 0)) AS '功能测试'," +
+             " sum(IF(taskType = '模块开发', taskTime, 0)) AS '模块开发'," +
+             " sum(IF(taskType = '数据处理', taskTime, 0)) AS '数据处理'" +
+             " from (select sum(taskTime) as taskTime ,taskType ,project.name as projectName from weekly left JOIN project on project.id = weekly.project group by taskType,project) p GROUP BY projectName\n";
     }else{
-        sql = "select sum(taskTime) as taskTime ,taskType ,project.name as projectName from weekly  left JOIN project on project.id = weekly.project where executor = "+req.userInfo.id+" group by taskType,project";
+        sql = "select  p.projectName," +
+            " sum(IF(taskType = 'bug修改', taskTime, 0)) AS 'bug修改'," +
+            " sum(IF(taskType = '方案设计', taskTime, 0)) AS '方案设计'," +
+            " sum(IF(taskType = '项目实施', taskTime, 0)) AS '项目实施'," +
+            " sum(IF(taskType = '功能测试', taskTime, 0)) AS '功能测试'," +
+            " sum(IF(taskType = '模块开发', taskTime, 0)) AS '模块开发'," +
+            " sum(IF(taskType = '数据处理', taskTime, 0)) AS '数据处理'" +
+            " from (select sum(taskTime) as taskTime ,taskType ,project.name as projectName from weekly left JOIN project on project.id = weekly.project where executor = "+req.userInfo.id+" group by taskType,project) p GROUP BY projectName\n";
+
     }
 
     db.sequelize.query(sql).then(function (results) {

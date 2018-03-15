@@ -6,7 +6,6 @@ layui.use(['table', 'form', 'layer'], function () {
 
     var isAdmin = $("#isAdmin").val();
     var cols = [];
-    console.log('------------'+Boolean(isAdmin));
     if (isAdmin=='true') {
 
         cols = [[ //表头
