@@ -22,6 +22,7 @@ layui.use(['table', 'form', 'layer'], function () {
                 title: '结束时间',
                 templet: '<div>{{d.endTime?d.endTime.split("T")[0]:""}}</div>'
             }
+            , {field: 'week', width: 100, title: '第几周'}
             , {field: 'taskDesc', width: 400, title: '任务描述'}
             , {field: 'project', width: 200, title: '所属项目', templet: '<div>{{d.projectObj.name}}</div>'}
             , {field: 'process', width: 100, title: '完成状态'}
@@ -54,6 +55,7 @@ layui.use(['table', 'form', 'layer'], function () {
                 title: '结束时间',
                 templet: '<div>{{d.endTime?d.endTime.split("T")[0]:""}}</div>'
             }
+            , {field: 'week', width: 100, title: '第几周'}
             , {field: 'taskDesc', width: 400, title: '任务描述'}
             , {field: 'project', width: 200, title: '所属项目', templet: '<div>{{d.projectObj.name}}</div>'}
             , {field: 'process', width: 100, title: '完成状态'}

@@ -290,7 +290,7 @@ router.get('/statisticByProject&Type',function(req,res){
             userInfo: req.userInfo,
             data: results
         });
-    })
+    });
 });
 
 router.get('/statisticByTaskType',function(req,res){
@@ -309,7 +309,7 @@ router.get('/statisticByTaskType',function(req,res){
             userInfo: req.userInfo,
             data: results
         });
-    })
+    });
 });
 
 
@@ -327,7 +327,7 @@ router.get('/statisticByProject',function(req,res){
             userInfo: req.userInfo,
             data: results
         });
-    })
+    });
 });
 
 router.get('/statisticByWeek',function(req,res){
@@ -346,7 +346,7 @@ router.get('/statisticByWeek',function(req,res){
             userInfo: req.userInfo,
             data: results
         });
-    })
+    });
 });
 
 router.get('/statisticByMonth',function(req,res){
@@ -365,7 +365,7 @@ router.get('/statisticByMonth',function(req,res){
             userInfo: req.userInfo,
             data: results
         });
-    })
+    });
 });
 
 
