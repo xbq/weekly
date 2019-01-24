@@ -24,6 +24,7 @@ router.post('/login',function (req,res) {
                 return;
             }else{
                 responseData.message="登陆成功";
+                responseData.user = userInfo;
                 req.cookies.set('userInfo',JSON.stringify({
                     id:userInfo.id,
                     username:new Buffer(userInfo.username).toString('base64'),
@@ -44,6 +45,14 @@ router.get('/logout',function (req,res,next) {
 
 router.get('/',function (req,res,next) {
     res.render('login');
+});
+
+router.get('/isLogin',function(req,res){
+    if(req.cookies.get('userInfo')){
+        res.json({isLogin:true});
+    }else{
+        res.json({isLogin:false});
+    }
 });
 
 

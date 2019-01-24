@@ -24,7 +24,7 @@ var User = db.sequelize.define('User', {
         isAdmin:Sequelize.BOOLEAN
     },
     {
-        timestamps: true,
+        timestamps: false,
         underscored: true,
         paranoid: true,
         freezeTableName: true,

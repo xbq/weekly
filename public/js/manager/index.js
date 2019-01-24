@@ -29,8 +29,9 @@ function initProjectCharts(theme) {
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
                 legend: {
-                    orient: 'vertical',
-                    x: 'left',
+                    //orient: 'vertical',
+                    x: '10',
+                    y:'40',
                     data: xAxisDate
                 },
                 toolbox: {
@@ -62,7 +63,13 @@ function initProjectCharts(theme) {
                         center: ['50%', '60%'],
                         data: data
                     }
-                ]
+                ],
+                /*grid: { // 控制画布的大小，调整下面这些值就可以
+                    x: 200,
+                    x2: 40,
+                    y:90,
+                    y2: 50,// y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
+                },*/
             };
 
 

@@ -2,7 +2,7 @@
  * layout是后台管理页面的大框架，包含了相同的导航条和侧边栏
  * 一些公共的函数也可以定义在这个文件里面
  */
-layui.use('form', function () {
+layui.use(['form','jquery'], function () {
     var $ = layui.jquery;
     $(function () {
         //退出

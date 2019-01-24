@@ -11,7 +11,7 @@ var Cookies = require('cookies');
 //创建app应用程序，相当于一个httpserver
 var app = new express();
 
-//设置静态文件托管，当用户访问的url匹配/public，name就会返回__dirname+'/public'
+//设置静态文件托管，当用户访问的url匹配/public，那么就会返回__dirname+'/public'
 app.use('/public', express.static(__dirname + '/public'));
 //配置应用模板
 //定义当前应用所使用的的模板引擎
@@ -40,10 +40,22 @@ app.use(function(req,res,next){
     next();
 });
 
+//设置允许跨域访问该服务.
+app.all('*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  //Access-Control-Allow-Headers ,可根据浏览器的F12查看,把对应的粘贴在这里就行
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', '*');
+  next();
+});
+
 app.use('/user', require('./routers/user'));
 app.use('/project', require('./routers/project'));
 app.use('/weekly', require('./routers/weekly'));
 app.use('/manager', require('./routers/manager'));
 app.use('/', require('./routers/api'));
 
-app.listen(8003);
+app.listen(8003, function() {
+  console.log('Express server listening on port ' + 8003);
+});
+

@@ -10,10 +10,10 @@ Project.belongsTo(User, {foreignKey: 'manager', as: 'managerObj'});
 //初始化处理
 router.use(function (req, res, next) {
     //这里需要进一步处理，到时候根据业务分几种角色来判断
-    if (!req.userInfo.username) {
+    /*if (!req.userInfo.username) {
         res.send('对不起，只有管理员才能进入此页面');
         return;
-    }
+    }*/
     responseData = {
         code: 0,
         message: ''

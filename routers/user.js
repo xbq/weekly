@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Role = require('../models/Role');
 var User = require('../models/User');
-
+var db = require('../models/db.js')
 User.belongsTo(Role, {foreignKey: 'role', as: 'roleObj'});
 
 //统一返回格式
@@ -23,6 +23,7 @@ router.get('/list', function (req, res) {
     var page = req.query.page || 1;
     var limit = Number(req.query.limit || 10);
     var offset = (page - 1) * limit;
+    console.log(page+'----'+limit+'------'+offset);
     User.findAndCountAll({
         include: [{
             model: Role,
@@ -81,17 +82,23 @@ router.get('/find', function (req, res) {
     })
 });
 
-//用户列表
+//用户列表,逻辑有问题，需要先把用户和项目的绑定关系解除
 router.get('/delete', function (req, res) {
-    User.destroy({where: req.query}).then(function (user) {
-        if (user) {
-            responseData.message = "删除成功";
-        } else {
-            responseData.code = 1;
-            responseData.message = "删除失败";
-        }
-        res.json(responseData);
+    console.log(req.query);
+    const sqlStr = `update project set manager = null where manager = '${req.query.id}'`
+    db.sequelize.query(sqlStr).then((result)=>{
+        console.log(result);
+        User.destroy({where: req.query}).then(function (user) {
+            if (user) {
+                responseData.message = "删除成功";
+            } else {
+                responseData.code = 1;
+                responseData.message = "删除失败";
+            }
+            res.json(responseData);
+        })
     })
+    
 });
 
 

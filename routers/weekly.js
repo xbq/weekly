@@ -11,19 +11,19 @@ Weekly.belongsTo(User, {foreignKey: 'approver', as: 'approverObj'});
 //统一返回格式
 var responseData = {};
 
-//初始化处理
-router.use(function (req, res, next) {
-    //这里需要进一步处理，到时候根据业务分几种角色来判断
-    if (!req.userInfo.username) {
-        res.send('对不起，请先登录');
-        return;
-    }
-    responseData = {
-        code: 0,
-        message: ''
-    };
-    next();
-});
+// //初始化处理
+// router.use(function (req, res, next) {
+//     //这里需要进一步处理，到时候根据业务分几种角色来判断
+//     if (!req.userInfo.username) {
+//         res.send('对不起，请先登录');
+//         return;
+//     }
+//     responseData = {
+//         code: 0,
+//         message: ''
+//     };
+//     next();
+// });
 
 //周报列表
 router.get('/list', function (req, res) {
@@ -105,7 +105,9 @@ router.get('/find', function (req, res) {
     if (!req.userInfo.isAdmin) {
         whereObj.executor = req.userInfo.id
     }else{
-        whereObj.executor = executor;
+        if(executor){
+            whereObj.executor = executor;
+        }
     }
     Weekly.findAndCountAll({
         where: whereObj,
